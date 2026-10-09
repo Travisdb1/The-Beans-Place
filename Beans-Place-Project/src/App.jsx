@@ -29,6 +29,9 @@
 // - ContactSection
 
 /* --- YOUR IMPORTS GO HERE --- */
+import { useState } from "react";
+import NavBar from "./components/NavBar";
+import HeroSection from "./components/HeroSection";
 
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
@@ -57,14 +60,25 @@
 // imports go below here
 
 export default function App() {
+    const [theme, setTheme] = useState("light");
+    const [cartCount, setCartCount] = useState(0);
+
+    const toggleCart = () => setCartCount((current) => current + 1);
+    
     return(
         <div className="app">
          { /* NAVBAR */ }
-
+            <NavBar 
+                toggleCart={toggleCart}
+                cartCount={cartCount}
+                theme={theme}
+                onToggleTheme={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
+            />
+            
          {/* HERO SECTION */}
          <section className="hero bg-hero">
           <div className="hero-grid">
-
+              <HeroSection />
         </div>
          </section>
 
