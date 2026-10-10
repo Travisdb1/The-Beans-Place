@@ -32,7 +32,7 @@
 import { useState } from "react";
 import NavBar from "./components/NavBar";
 import HeroSection from "./components/HeroSection";
-
+import RibbonTicker from "./components/RibbonTicker";
 // STEP 2: Create and export the App component
 // Use: export default function App() { ... }
 //
@@ -60,57 +60,49 @@ import HeroSection from "./components/HeroSection";
 // imports go below here
 
 export default function App() {
-    const [theme, setTheme] = useState("light");
-    const [cartCount, setCartCount] = useState(0);
+  const [theme, setTheme] = useState("light");
+  const [cartCount, setCartCount] = useState(0);
 
-    const toggleCart = () => setCartCount((current) => current + 1);
-    
-    return(
-        <div className="app">
-         { /* NAVBAR */ }
-            <NavBar 
-                toggleCart={toggleCart}
-                cartCount={cartCount}
-                theme={theme}
-                onToggleTheme={() => setTheme((current) => (current === "light" ? "dark" : "light"))}
-            />
-            
-         {/* HERO SECTION */}
-         <section className="hero bg-hero">
-          <div className="hero-grid">
-              <HeroSection />
+  const toggleCart = () => setCartCount((current) => current + 1);
+
+  return (
+    <div className="app">
+      {/* NAVBAR */}
+      <NavBar
+        toggleCart={toggleCart}
+        cartCount={cartCount}
+        theme={theme}
+        onToggleTheme={() =>
+          setTheme((current) => (current === "light" ? "dark" : "light"))}
+      />
+
+      {/* HERO SECTION */}
+      <section className="hero bg-hero">
+        <div className="hero-grid">
+          <HeroSection />
         </div>
-         </section>
+      </section>
 
-         {/* FEATURES/CAROUSEL SECTION */}
-         <section className="features bg-features" id="shop">
+      {/* Ribbon Ticker */}
+      <RibbonTicker />
 
-         </section>
+      {/* FEATURES/CAROUSEL SECTION */}
+      <section className="features bg-features" id="shop"></section>
 
-         {/* PRODUCT SHOWCASE SECTION */}
-         <section className="bg-cta">
+      {/* PRODUCT SHOWCASE SECTION */}
+      <section className="bg-cta"></section>
 
-         </section>
+      {/* CTA SECTION */}
+      <section className="bg-cta"></section>
 
-         {/* CTA SECTION */}
-         <section className="bg-cta">
+      {/* ABOUT */}
+      <section className="bg-cta" id="about"></section>
 
-         </section>
+      {/* CONTACT */}
+      <section className="bg-cta" id="contact"></section>
 
-         {/* ABOUT */}
-         <section className="bg-cta" id="about">
-
-         </section>
-
-         {/* CONTACT */}
-         <section className="bg-cta" id="contact">
-
-         </section>
-
-         {/* FOOTER SECTION */}
-         <section className="bg-footer">
-
-         </section>
-        </div>
-    )
+      {/* FOOTER SECTION */}
+      <section className="bg-footer"></section>
+    </div>
+  );
 }

@@ -32,8 +32,22 @@
 //   imgColombianSupremo, imgEthiopianHarrar, imgArabianMocha
 
 /* --- YOUR IMPORTS GO HERE --- */
-
-
+import { useEffect, useRef, useState } from "react";
+import imgRedSulawesi from "../assets/Red-Sulawesi-Bag.png";
+import imgUrigacheffe from "../assets/Urigacheffe-bag.png";
+import imgTanzaniaPeaberry from "../assets/TanzaniaPeaberry-bag.png";
+import imgPanamaGeisha from "../assets/PanamaGeisha";
+import imgVietnameserobusta from "../assets/Vietnamese-Robust.png";
+import imgBrazilianSantos from "../assets/Brazillian-Santos-Bag.png";
+import imgCostaRicaTarrazu from "../assets/Costa-Rica-Tarrzu-Bag.png";
+import imgGuatemalaAntigua from "../assets/Guatemala-Antigue-Bag.png";
+import imgKenyaAA from "../assets/Kenya-AA-Bag.png";
+import imgSumatraMandheling from "../assets/Sumatra-Mandheling-Bag.png";
+import imgKona from "../assets/Kona-Bag.png";
+import imgJamaicanBlueMountain from "../assets/Jamaican-Blue-Mountain-Bag.png";
+import imgColombianSupremo from "../assets/Colobian-Supremo-Bag.png";
+import imgEthiopianHarrar from "../assets/Ethopian-Harrar-Bag.png";
+import imgArabianMocha from "../assets/Arabian-Mocha-Bag.png";
 
 // STEP 2: Define three row arrays (outside the component)
 // Each row contains the same images but in different orders.
@@ -44,7 +58,6 @@
 // const row3 = [imgGuatemalaAntigua, imgJamaicanBlueMountain, ...];
 
 /* --- YOUR ROW ARRAYS GO HERE --- */
-
 
 // STEP 3: ImageRow helper component
 // function ImageRow({ images, speed = -0.25, offset = 0 }) { ... }
@@ -64,7 +77,6 @@
 // about to enter the viewport, improving performance.
 
 /* --- YOUR IMAGEROW COMPONENT GOES HERE --- */
-
 
 // STEP 4: Create and export FeaturesSection
 // export default function FeaturesSection() { ... }
@@ -91,3 +103,77 @@
 //      </section>
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
+const row1 = [
+  imgJamaicanBlueMountain,
+  imgEthiopianHarrar,
+  imgGuatemalaAntigua,
+  imgTanzaniaPeaberry,
+  imgColombianSupremo,
+  imgVietnameserobusta,
+  imgKona,
+  imgArabianMocha,
+  imgKenyaAA,
+  imgUrigacheffe,
+  imgSumatraMandheling,
+  imgPanamaGeisha,
+  imgRedSulawesi,
+  imgCostaRicaTarrazu,
+  imgBrazilianSantos,
+];
+
+const row2 = [
+    imgKenyaAA,
+    imgSumatraMandheling,
+    imgVietnameserobusta,
+    imgArabianMocha,
+    imgPanamaGeisha,
+    imgGuatemalaAntigua,
+    imgJamaicanBlueMountain,
+    imgColombianSupremo,
+    imgUrigacheffe,
+    imgTanzaniaPeaberry,
+    imgEthiopianHarrar,
+    imgKona,
+    imgRedSulawesi,
+    imgBrazilianSantos,
+    imgCostaRicaTarrazu
+];
+
+const row3 = [
+    imgGuatemalaAntigua,
+    imgJamaicanBlueMountain,
+    imgEthiopianHarrar,
+    imgKona,
+    imgUrigacheffe,
+    imgTanzaniaPeaberry,
+    imgKenyaAA,
+    imgColombianSupremo,
+    imgVietnameserobusta,
+    imgSumatraMandheling,
+    imgPanamaGeisha,
+    imgArabianMocha,
+    imgRedSulawesi,
+    imgCostaRicaTarrazu,
+    imgBrazilianSantos
+];
+
+function ImagaRow( { images, offset = 0 }) {
+    // we are going to double the images so its wide enough to never show gaps
+    const doubled = [...images, ...images];
+
+    return (
+        <div className = "carousel-row" style = {{ transform: `translate3d(${offset}px, 0, 0)` }}>
+                {doubled.map((src, index) => (
+                    <div className="carousel-card" key={index}>
+                        <img
+                            src={src}
+                            alt={`Coffee bag ${{index % images.length} + 1}`}
+                            className="carousel-image"
+                            loading="lazy"
+                        />
+                    </div>
+                ))}
+
+        </div>
+    );
+}
