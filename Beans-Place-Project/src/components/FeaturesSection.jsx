@@ -34,19 +34,19 @@
 /* --- YOUR IMPORTS GO HERE --- */
 import { useEffect, useRef, useState } from "react";
 import imgRedSulawesi from "../assets/Red-Sulawesi-Bag.png";
-import imgUrigacheffe from "../assets/Urigacheffe-bag.png";
-import imgTanzaniaPeaberry from "../assets/TanzaniaPeaberry-bag.png";
-import imgPanamaGeisha from "../assets/PanamaGeisha";
-import imgVietnameserobusta from "../assets/Vietnamese-Robust.png";
-import imgBrazilianSantos from "../assets/Brazillian-Santos-Bag.png";
-import imgCostaRicaTarrazu from "../assets/Costa-Rica-Tarrzu-Bag.png";
-import imgGuatemalaAntigua from "../assets/Guatemala-Antigue-Bag.png";
+import imgUrigacheffe from "../assets/Urigacheffe-Bag.png";
+import imgTanzaniaPeaberry from "../assets/Tanzania-Peaberry-Bag.png";
+import imgPanamaGeisha from "../assets/Panama-Geisha.png";
+import imgVietnameserobusta from "../assets/Vietnamese-Robusta.png";
+import imgBrazilianSantos from "../assets/Brazilian-Santos-Bag.png";
+import imgCostaRicaTarrazu from "../assets/Costa-Rica-Tarrazu-Bag.png";
+import imgGuatemalaAntigua from "../assets/Guatemala-Antigua-Bag.png";
 import imgKenyaAA from "../assets/Kenya-AA-Bag.png";
 import imgSumatraMandheling from "../assets/Sumatra-Mandheling-Bag.png";
 import imgKona from "../assets/Kona-Bag.png";
 import imgJamaicanBlueMountain from "../assets/Jamaican-Blue-Mountain-Bag.png";
-import imgColombianSupremo from "../assets/Colobian-Supremo-Bag.png";
-import imgEthiopianHarrar from "../assets/Ethopian-Harrar-Bag.png";
+import imgColombianSupremo from "../assets/Colombian-Supremo-Bag.png";
+import imgEthiopianHarrar from "../assets/Ethiopian-Harrar-Bag.png";
 import imgArabianMocha from "../assets/Arabian-Mocha-Bag.png";
 
 // STEP 2: Define three row arrays (outside the component)
@@ -157,23 +157,64 @@ const row3 = [
     imgBrazilianSantos
 ];
 
-function ImagaRow( { images, offset = 0 }) {
-    // we are going to double the images so its wide enough to never show gaps
-    const doubled = [...images, ...images];
+function ImageRow({ images, offset = 0 }) {
+  const doubled = [...images, ...images];
 
-    return (
-        <div className = "carousel-row" style = {{ transform: `translate3d(${offset}px, 0, 0)` }}>
-                {doubled.map((src, index) => (
-                    <div className="carousel-card" key={index}>
-                        <img
-                            src={src}
-                            alt={`Coffee bag ${{index % images.length} + 1}`}
-                            className="carousel-image"
-                            loading="lazy"
-                        />
-                    </div>
-                ))}
-
+  return (
+    <div
+      className="carousel-row"
+      style={{ transform: `translate3d(${offset}px, 0, 0)` }}
+    >
+      {doubled.map((src, index) => (
+        <div className="carousel-card" key={`${src}-${index}`}>
+          <img
+            src={src}
+            alt={`Coffee bag ${index % images.length + 1}`}
+            className="carousel-image"
+            loading="lazy"
+          />
         </div>
-    );
+      ))}
+    </div>
+  );
+}
+
+export default function FeaturesSection() {
+  const sectionRef = useRef(null);
+  const [offsets, setOffsets] = useState([0, 0, 0]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (!sectionRef.current) return;
+
+      const rect = sectionRef.current.getBoundingClientRect();
+      const viewHeight = window.innerHeight;
+      const progress = 1 - rect.bottom / (viewHeight + rect.height);
+      const p = Math.max(0, Math.min(1, progress));
+      const range = Math.min(window.innerWidth * 0.5, 600);
+
+      setOffsets([
+        -p * range,
+        // row1: slides left
+        p * range - range,
+        // row2:
+        -p * range * 0.7,
+      ]);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  return (
+    <section className="carousel-gallery-section" ref={sectionRef}>
+      <div className="carousel-gallery-container">
+        <ImageRow images={row1} offset={offsets[0]} />
+        <ImageRow images={row2} offset={offsets[1]} />
+        <ImageRow images={row3} offset={offsets[2]} />
+      </div>
+    </section>
+  );
 }
