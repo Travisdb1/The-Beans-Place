@@ -28,6 +28,12 @@
 //   storeBarista from "../assets/store_barista.jpeg"
 
 /* --- YOUR IMPORTS GO HERE --- */
+import Badge from "./ui/Badge";
+import Card, { CardHeader, CardContent } from "./ui/Card";
+import Seperator from ".ui/Seperator";
+import ScrollReveal, { StaggerContainer, StaggerItem } from "./ui/ScrollReveal";
+import coffeePlants from "../assets/coffee_plants.jpeg";
+import storeBarista from "../assets/store_Barista.jpeg";
 
 
 // STEP 2: Define the values array (outside the component)
@@ -91,3 +97,93 @@
 //   </div>
 
 /* --- YOUR COMPONENT CODE GOES HERE --- */
+const values = [
+    {
+        icon: "🌍",
+        title: "Direct Trade Origins",
+        description:
+        "We partnes directly with small farms in Ethiopia, Colombia, Guatemala, and Indonesia. Every bag is fully tracable to farm it came from."
+    },
+    {
+        icon: "☕",
+        title: "Small-Batch Roasting",
+        description:
+        "Our master roaster profiles every bean to unlock it's peak flavor. We roast in 25lb batches for consistency and freshness you can taste."
+    },
+       {
+        icon: "🚚",
+        title: "Roast-To-Order Ship[ping",
+        description:
+        "We don't pre-roast and shelve. Your beans are roasted after your order and shipped within 1-2 days. Free delivery on orders over $50"
+    },
+];
+
+export default function AboutSection() {
+    return (
+        <div className="about-content">
+            <ScrollReveal animation="fadeUp">
+                <Badge variant="default" className="mb-4">
+                    Founded 2012 | Roasting in-house since day one.
+                </Badge>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeUp" delay={0.1}>
+                <h1>
+                    <span className="muted">Our Story</span>
+                </h1>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fadeIn" delay={.2}>
+                <Seperator className="mb-8 max-w-64" />
+            </ScrollReveal>
+
+            {/* Two-Colum story with image */}
+            <div className="about-story-grid">
+                <ScrollReveal animation="fadeLeft" className="about-story-text">
+                    <p className="about-body lead--light">
+                        The Beans Place started in 2012 with one simple belief: great coffee
+                        should be accessible to everyone -- not just aficionados. We work
+                        directly with farming cooperatives across four continents, paying
+                        above fair-trade prices to ensure quality from soil to sip.
+                    </p>
+
+                    <p className="about-body lead--light">
+                        Every week, our roastmaster cups dozens of samples to select only
+                        the lots that meet our standard. Wether you prefer a bright, fruity
+                        Ethiopian Yirgacheffe or a deep, chocolaty Colombian Supremo, we 
+                        roast each batch to order so it arrives at peak freshness.
+                    </p>
+
+                    <div className="about-video-wrapper">
+                        <video
+                        className="about-video"
+                        src="https://assets.mixkit.co/videos/preview/mixkit-coffee-roasting-process-1974-large.mp4"
+                        poster={storeBarista}
+                        controlsmuted
+                        playsInlineloop
+                        />
+                    </div>
+                </ScrollReveal>
+
+                <ScrollReveal 
+                animation="fadeRight" 
+                delay={0.2}
+                className="about-story-images"
+                >
+                    <div className="about-image-stack">
+                        <img 
+                        src={coffeePlants}
+                        alt="Coffee plants on a farm"
+                        className="about-image about-image-main"
+                        />
+                        <img
+                        src={storeBarista}
+                        alt="Barista crafting coffee"
+                        className="about-image about-image-overlay"
+                        />
+                    </div>
+                </ScrollReveal>
+            </div>
+        </div>
+    )
+}
