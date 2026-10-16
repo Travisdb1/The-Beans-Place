@@ -113,9 +113,10 @@ export default function CtaSection() {
            </ScrollReveal>
 
            <ScrollReveal animation="fadeUp" delay={0.2}>
-                <p className="subtitle">
+                <p className="cta-subtitle">
                  Skip the line, Order premium single-origin coffee online and get it
-                 roasted to order. From our roastery to your doorstep in 1-2 business days.
+                 roasted to order. From our roastery to your doorstep in 1-2 business
+                 days.
                 </p>
            </ScrollReveal>
 

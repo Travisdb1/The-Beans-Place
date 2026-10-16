@@ -30,7 +30,7 @@
 /* --- YOUR IMPORTS GO HERE --- */
 import Badge from "./ui/Badge";
 import Card, { CardHeader, CardContent } from "./ui/Card";
-import Seperator from ".ui/Seperator";
+import Separator from "./ui/Separator";
 import ScrollReveal, { StaggerContainer, StaggerItem } from "./ui/ScrollReveal";
 import coffeePlants from "../assets/coffee_plants.jpeg";
 import storeBarista from "../assets/store_Barista.jpeg";
@@ -134,7 +134,7 @@ export default function AboutSection() {
             </ScrollReveal>
 
             <ScrollReveal animation="fadeIn" delay={.2}>
-                <Seperator className="mb-8 max-w-64" />
+                <Separator className="mb-8 max-w-64" />
             </ScrollReveal>
 
             {/* Two-Colum story with image */}
@@ -183,7 +183,30 @@ export default function AboutSection() {
                         />
                     </div>
                 </ScrollReveal>
-            </div>
+            </div> 
+
+            {/* Value Cards */}
+            <StaggerContainer staggerDelay={0.15} className="about-cards-grid">
+                {values.map((v) => (
+                    <StaggerItem key= {v.title} animation="fadeUp">
+                        <Card glass className="about-value-card">
+                            <CardHeader>
+                                <span className="about-card-icon">{v.icon}</span>
+                                <h3 className="text-lg font-bold"
+                                style={{ color: "var(--cream" }}
+                                >
+                                    {v.title}
+                                </h3>
+                            </CardHeader>
+                            <CardContent>
+                            <p className="text-sm leading-relaxed text-white/70">
+                                   {v.description}
+                            </p>
+                            </CardContent>
+                        </Card>
+                    </StaggerItem>
+                ))}
+            </StaggerContainer>
         </div>
     )
 }
