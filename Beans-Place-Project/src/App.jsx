@@ -39,6 +39,7 @@ import CtaSection from "./components/CtaSection";
 import AboutSection from "./components/AboutSection";
 import ContactSection from "./components/ContactSection";
 import FooterSection from "./components/FooterSection";
+import ShoppingCart from "./components/ShoppingCart";
 
 
 
@@ -196,6 +197,15 @@ export default function App() {
 
   return (
     <div className="app">
+      {/* Shopping Cart */}
+         <ShoppingCart 
+          isOpen={cartOpen}
+          onToggleCart={toggleCart}
+          items={cartItems}
+          updateQty={updateCartQty}
+          removeItem={removeFromCart}
+         />
+         
       {/* NAVBAR */}
       <NavBar
         toggleCart={toggleCart}
